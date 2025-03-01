@@ -1,0 +1,11 @@
+component_id;component_type;location;model;status;switch_port;ip_address
+1;PC;342;Dell Optiplex 7080;Free;Gi0/1;192.168.10.10
+2;Router;342;Cisco 2911;Free;Gi0/2;192.168.10.1
+3;PC;342;HP ProDesk 400 G7;Free;Gi0/3;192.168.20.10
+4;Switch;342;Cisco Catalyst 2960;Free;NULL;192.168.20.1
+5;PC;342;Dell Optiplex 7090;Occupied;Gi0/4;192.168.30.10
+6;PC;342;HP ProDesk 405 G8;Occupied;Gi0/5;192.168.30.11
+7;Router;342;Cisco 4331;Maintenance;Gi0/6;192.168.40.1
+8;PC;342;Dell Optiplex 3070;Free;Gi0/7;192.168.40.10
+9;Firewall;342;Fortinet FG-60F;Free;NULL;192.168.50.1
+10;PC;342;HP ProDesk 400 G9;Faulty;Gi0/8;192.168.60.10
