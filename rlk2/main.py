@@ -101,7 +101,7 @@ def clear_bd():
 
 
 data = 'mydatabase.db'
-text = '2sw+2R"huawei"'
+text = '2sw+2R"Cisco"'
 clear_bd()
 planner(text,data)
 control()
