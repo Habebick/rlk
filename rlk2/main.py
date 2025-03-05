@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 import re
-
+from sda import generate_table
 
 def get_active_devices(db_filename):
     try:
@@ -33,7 +33,6 @@ def update_devices(component_type, num_to_update, cursor, model, new_status):
     """
     cursor.execute(query_update, (new_status, component_type, model, new_status,
                                   component_type, model, new_status, num_to_update))
-    print(f"Успешно обновлено {num_to_update} устройств типа '{component_type}' '{model}'.")
 
 def update_devices_status(db_filename, num_routers, num_switches, model, new_status):
     try:
@@ -90,8 +89,7 @@ def planner(text,data):
 
 #добавить топологию 2sw+2R"huawei"
 def control():
-    devices = get_active_devices(data)
-    return devices
+    generate_table()
 
 
 def clear_bd():
@@ -102,7 +100,6 @@ def clear_bd():
 
 data = 'mydatabase.db'
 text = '2sw+2R"Cisco"'
-clear_bd()
 planner(text,data)
 control()
 
