@@ -99,7 +99,10 @@ def clear_bd():
 
 
 data = 'mydatabase.db'
-text = '2sw+2R"Cisco"'
+text = '1sw+2R"Cisco"'
+clear_bd()
+planner(text,data)
+text = '1sw+0R"Huawei"'
 planner(text,data)
 
 #[('2', 's'), ('2', 'R')]
