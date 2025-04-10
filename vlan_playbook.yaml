@@ -1,0 +1,28 @@
+- gather_facts: 'no'
+  tasks:
+  - name: "\u041F\u0440\u043E\u0432\u0435\u0440\u044F\u0435\u043C \u0434\u043E\u0441\
+      \u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C \u043F\u043E SSH"
+    wait_for_connection:
+      delay: 5
+      timeout: 60
+  - ios_config:
+      lines:
+      - switchport mode access
+      - switchport access vlan 110
+      - no cdp enable
+      parents: interface f0/3
+    name: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u043F\u043E\u0440\
+      \u0442\u0430 f0/3 \u0432 VLAN 110"
+  - ios_config:
+      lines:
+      - switchport mode access
+      - switchport access vlan 120
+      - no cdp enable
+      parents: interface f1/0/1
+    name: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u043F\u043E\u0440\
+      \u0442\u0430 f1/0/1 \u0432 VLAN 120"
+  - ios_command:
+      commands:
+      - copy running-config startup-config
+    name: "\u0421\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u043C \u043A\u043E\u043D\
+      \u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044E "
