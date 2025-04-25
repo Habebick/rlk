@@ -265,7 +265,7 @@ def create_playbook(devices, group_id, output_file="vlan_playbook.yaml", param=T
             else:
                 vlan += 10
             add_vlan_task(device_group, auditorium, interface_name[1], vlan)
-            add_vlan(vlan, interface_name[0], group_id, auditorium)
+            add_vlan(vlan, interface_name[1], group_id, auditorium)
         else:
             # Добавляем задание для конкретной группы
             del_vlan_task(device_group, auditorium, interface_name[0], vlan)
@@ -321,25 +321,6 @@ def update_bd(devices):
         print(f"Ошибка: {e}")
 
 
-def check_enough(component_type, cursor, model, new_status):
-    # Добавить Any
-    query_check = """
-        SELECT COUNT(*), component_id, port1 FROM components
-        WHERE component_type = ? AND model = ? AND status != ? LIMIT 1
-    """
-    cursor.execute(query_check, (component_type, model, new_status))
-    return cursor.fetchone()
-
-
-def update_status(component_id, cursor, status):
-    query_update = """
-        UPDATE components
-        SET status = ? 
-        WHERE component_id = ?
-    """
-    cursor.execute(query_update, (status, component_id,))
-
-
 def max_groups_id():
     try:
         conn = sqlite3.connect(db_filename)
@@ -352,7 +333,10 @@ def max_groups_id():
         group_id = result.fetchone()[0]
         cursor.close()
         conn.close()
-        return (group_id)
+        if group_id:
+            return (group_id)
+        else:
+            return 0
     except Exception as e:
         print(f"Произошла ошибка: {e}")
 
@@ -360,7 +344,7 @@ def max_groups_id():
 def test():
     try:
         conn = sqlite3.connect(db_filename)
-        query = "SELECT * FROM components WHERE status = 'Active'"
+        query = "SELECT * FROM components"
         devices = pd.read_sql_query(query, conn)
         print(devices)
         conn.close()
@@ -410,7 +394,7 @@ def clear_bd(groups_id, db_filename = 'test.db'):  # Добавим db_filename 
             conn.close()
 
 
-#clear_bd(42)
-#test()
-#planner(text)
-#test()
+clear_bd(3)
+test()
+planner(text)
+test()

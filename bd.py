@@ -1,8 +1,7 @@
 import sqlite3
 import os
 
-def create_and_populate_database(db_filename="components.db"):
-    db_filename = 'test.db'
+def create_and_populate_database(db_filename="test.db"):
     conn = None  # Инициализация conn вне блока try
     try:
         # Удаляем базу данных, если она существует (чтобы гарантировать создание с новой схемой)
@@ -23,7 +22,7 @@ def create_and_populate_database(db_filename="components.db"):
                 status TEXT,
                 port1 TEXT,
                 port2 TEXT,
-                groups_id INTEGER DEFAULT NULL  
+                groups_id INTEGER DEFAULT NULL
             )
         """)
         print("Таблица 'components' успешно создана.")
@@ -32,21 +31,15 @@ def create_and_populate_database(db_filename="components.db"):
         data = [
             (1, 'Switch', 344, 'Huawei', 'Free', 'f1/0/33', 'f1/0/3', None),
             (2, 'Switch', 344, 'Cisco', 'Free', 'f1/0/34', 'f0/1', None),
-            (3, 'Switch', 344, 'D-Link', 'Free', 'f0/1', 'f0/3', 3),
+            (3, 'Switch', 344, 'D-Link', 'Free', 'f0/1', 'f0/3', None),
             (4, 'Switch', 344, 'Cisco', 'Free', 'f1/0/35', 'f0/1', None)
         ]
 
-        # cursor.executemany("""
-        #     INSERT INTO components (component_id, component_type, location, model, status, port1, port2)
-        #     VALUES (?, ?, ?, ?, ?, ?, ?)
-        # """, data)
-        # Альтернативный способ вставки данных с учетом нового поля:
         cursor.executemany("""
             INSERT INTO components (component_id, component_type, location, model, status, port1, port2, groups_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?) 
         """, data)
         print("Данные успешно вставлены в таблицу 'components'.")
-
 
         # 4. Сохранение изменений и закрытие соединения
         conn.commit()
