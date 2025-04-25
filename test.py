@@ -13,7 +13,8 @@ class Device:
         Args:
             device_type (str): Тип устройства (например, "Switch").
             vendor (str): Производитель устройства (например, "Cisco").
-            interface_name (str): Имя интерфейса (например, "f0/1").
+            port1 (str): Имя интерфейса (например, "f0/1").
+            port2 (str): Имя интерфейса (например, "f0/1").
             audience_id (int): ID аудитории (например, 244).
         """
         self.device_type = device_type
@@ -21,7 +22,6 @@ class Device:
         self.port1 = port1
         self.port2 = port2
         self.audience_id = audience_id
-        self.status = "active"  # Например, начальный статус
 
     def set_device_type(self, device_type):
         """Устанавливает тип устройства."""
